@@ -1,0 +1,942 @@
+<Home>:
+    name:"Home"
+    MDFloatLayout:
+        id: home_body
+        MDIconButton:
+            icon:"history"
+            theme_text_color: 'Custom'
+            text_color: 0.949, 0.031, 0.424
+            pos_hint: {'top':0.97,'center_x': .1}
+            elevation: 3
+            on_release:
+                root.manager.transition.direction="left"
+                root.manager.current='chat'
+
+        MDChip:
+            id:name_holder
+            text: ""
+            icon_left: "account"
+            font_size: "12sp"
+            size_hint_x: None
+            width: '100px'
+            theme_text_color: 'Custom'
+            md_bg_color: [0.078, 0.078, 0.078]
+            text_color: 0.949, 0.031, 0.424
+            pos_hint: {'top': 0.97,'center_x': .5}
+            elevation: 3
+
+        MDIconButton:
+            icon:"cog"
+            theme_text_color: 'Custom'
+            text_color: 0.949, 0.031, 0.424
+            pos_hint: {'top': 0.97,'center_x': 0.9}
+            on_release: root.menu()
+            elevation: 3
+
+
+        MDCard:
+            orientation: "vertical"
+            radius: [10,10,0,0]
+            pos_hint: {'center_x': .5,'center_y': 0.44}
+            size_hint: 1, 0.89
+            md_bg_color: [0.078, 0.078, 0.078]
+            style:'filled'
+            id:main_card
+            ScrollView:
+                MDBoxLayout:
+                    orientation: "vertical"
+                    # height: self.minimum_height
+                    font_name: './fonts/emoji.ttf'
+                    adaptive_height: True
+                    spacing: '10dp'
+                    padding: "10dp"
+                    id:content_box
+
+        MDTextField:
+            id:question_input
+            hint_text:"Ask anything....."
+            mode: "fill"
+            fill_color_normal: [0.051, 0.051, 0.047]
+            hint_text_color_focus: 'white'
+            text_color_focus: "gray"
+            font_name: 'seguiemj'
+            cursor_color: [0.949, 0.031, 0.424]
+            line_color_focus: (0.949, 0.031, 0.424)
+            multiline: True
+
+
+
+        MDIconButton:
+            id:send_button
+            size_hint_max_x: 3
+            icon: 'send'
+            theme_text_color: 'Custom'
+            theme_icon_color: 'Custom'
+            md_bg_color: [0.949, 0.031, 0.424]
+            text_color:  'black'
+            pos_hint: {'right': 0.98 , 'center_y': 0.13}
+            on_release: root.start_task()
+            # on_touch_down: root.start_task
+
+        MDIconButton:
+
+            icon: 'tab-plus'
+            theme_text_color: 'Custom'
+            theme_icon_color: 'Custom'
+            icon_size: '22sp'
+            # disabled: 'True'
+            opacity: 1
+            text_color:  (0.949, 0.031, 0.424)
+            pos_hint: {'right': 0.98 , 'center_y': 0.20}
+            on_release: root.clear_chat()
+
+
+
+        MDSpinner:
+            id: ai_spinner
+            active: False
+            size_hint: None, None
+            size: "30dp", "40dp"
+            pos_hint: {'right': 0.98 , 'center_y': 0.13}
+            color: [0.949, 0.031, 0.424]
+
+<Sign_Up>:
+    name: 'sign_up'
+    MDFloatLayout:
+        md_bg_color: 'black'
+        # AsyncImage:
+        #     source: 'image_set/paper.jpeg'
+        #     fit_mode: 'fill'
+        Image:
+            source: "./icon_sets/app_icons/ico-SM.png"
+            allow_stretch:True
+            size_hint_y: None
+            pos_hint: {'center_x':0.30, 'top':1 }
+
+        MDLabel:
+            text: 'G R I M E'
+            font_name: './fonts/Plaster-Regular.ttf'
+            theme_text_color: 'Custom'
+            text_color:0.949, 0.031, 0.424
+            font_size: "20sp"
+            size_hint_y: None
+            halign: 'center'
+            pos_hint: {'top':1}
+
+        MDLabel:
+            text: "SIGN UP"
+            font_style:'Button'
+            size_hint_y: None
+            font_size: "20sp"
+            halign: 'center'
+            theme_text_color: 'Custom'
+            text_color:"white"
+            pos_hint: {'top':0.96}
+
+        # name input field
+        MDTextField:
+            id: name
+            hint_text: "Full Name"
+            pos_hint: {'center_x': .5,'center_y': 0.70}
+            theme_text_color: 'Custom'
+            size_hint_x: 0.90
+            icon_right: 'account'
+            font_size: '15sp'
+            valign: 'center'
+            helper_text: "*Only lowercase letters(First name and Surnname only)"
+            helper_text_mode: "on_focus"
+            md_bg_color: 'black'
+            focus_behavior: True
+            icon_right_color_focus:'white'
+            hint_text_color_focus: 'white'
+            text_color_focus: "white"
+            cursor_color: [0.949, 0.031, 0.424]
+            line_color_focus: 'white'
+#   username input field
+        MDTextField:
+            id: username
+            hint_text: "Create username"
+            pos_hint: {'center_x': .5,'center_y': 0.60}
+            theme_text_color: 'Custom'
+            size_hint_x: 0.90
+            on_text: root.check_username(self.text)
+            # mode:'round'
+            icon_right: 'account-key'
+            font_size: '15sp'
+            text_color_focus: "white"
+            focus_behavior: True
+            helper_text: "*Include:(0-9),(a-z),Optional((A-Z) (!,@,$,%,^,&,*,+,#)) and 4+"
+            helper_text_mode: "on_focus"
+            icon_right_color_focus:'white'
+            hint_text_color_focus: 'white'
+            on_text_validate:
+            text_color_focus: "gray"
+            cursor_color: [0.949, 0.031, 0.424]
+            line_color_focus: 'white'
+# email input field
+        MDTextField:
+            id: email
+            hint_text: "Email"
+            pos_hint: {'center_x': .5,'center_y': 0.50}
+            theme_text_color: 'Custom'
+            size_hint_x: 0.90
+            icon_right: 'email'
+            font_size: '15sp'
+            helper_text: "myname@example.com"
+            helper_text_mode: "on_focus"
+            focus_behavior: True
+            icon_right_color_focus:'white'
+            hint_text_color_focus: 'white'
+            text_color_focus: "white"
+            cursor_color: [0.949, 0.031, 0.424]
+            line_color_focus: 'white'
+
+# gender input field
+        MDTextField:
+            id: gender
+            hint_text: "Gender"
+            pos_hint: {'center_x': .5, 'center_y': 0.40}
+            size_hint_x: 0.90
+            icon_right:"gender-male-female"
+            theme_text_color: 'Custom'
+            font_size: '15sp'
+            focus_behavior: True
+            # mode:'round'
+            helper_text: "*Select options from the menu"
+            helper_text_mode: "on_focus"
+            icon_right_color_focus:'white'
+            # helper_text_color_normal: () ""
+            hint_text_color_focus:'white'
+            text_color_focus: "white"
+            cursor_color: [0.949, 0.031, 0.424]
+            line_color_focus: 'white'
+            on_focus: if self.focus: root.gender_select()
+
+        MDIconButton:
+            icon:'arrow-left-circle-outline'
+            size_hint_y: None
+            pos_hint: {'center_x':0.028, 'top':1 }
+            on_release:
+                root.manager.transition.direction='left'
+                root.manager.current = 'landing_page'
+
+
+  # password input field
+        MDTextField:
+            id: passwords
+            hint_text: "Password"
+            pos_hint: {'center_x': .5,'center_y': 0.30}
+            theme_text_color: 'Custom'
+            size_hint_x: 0.90
+            icon_right:"lock"
+            min_text_length:8
+            focus_behavior: True
+            font_size: '15sp'
+            helper_text: "*Include: (!,@,$,%,^,&,*,+,#),(0-9),(a-z),(A-Z) and 8+"
+            helper_text_mode: "on_focus"
+            icon_right_color_focus:'white'
+            hint_text_color_focus: 'white'
+            text_color_focus: "white"
+            cursor_color: [0.949, 0.031, 0.424]
+            line_color_focus: 'white'
+
+
+# re-type-password input field
+        MDTextField:
+            id: confirm_pass
+            hint_text: "Re-Type Password"
+            pos_hint: {'center_x': 0.5,'center_y': 0.20}
+            theme_text_color: 'Custom'
+            size_hint_x: 0.90
+            icon_right:"lock-check"
+            font_size: '15sp'
+            helper_text: ""
+            font_name: 'seguiemj'
+            helper_text_mode: "on_focus"
+            focus_behavior: True
+            icon_right_color_focus:'white'
+            hint_text_color_focus:'white'
+            text_color_focus: "white"
+            line_color_focus: 'white'
+
+#  sign_up button
+        MDRaisedButton:
+            text: "SIGN UP"
+            font_style: 'Button'
+            text_color: "white"
+            size_hint_y: None
+            id:main_button
+            font_size: "24sp"
+            elevation: 5
+            pos_hint: {'center_x': 0.5,'center_y': 0.10}
+            size_hint: 0.9,None
+            elevation: 4
+            height: "97dp"
+            md_bg_color: (0.949, 0.031, 0.424)
+            on_release: root.upload_user_data()
+# to sign in page
+        MDTextButton:
+            text:'Already have an account, SIGN IN ?'
+            size_hint_y: None
+            font_size: '13sp'
+            theme_text_color: 'Custom'
+            text_color: (0.949, 0.031, 0.424)
+            pos_hint: {'center_x': 0.5 , 'center_y': 0.023}
+            on_release:
+                root.manager.transition.direction='left'
+                root.manager.current = 'sign_in'
+
+<Sign_In>:
+    name: 'sign_in'
+    MDFloatLayout:
+        md_bg_color: 'black'
+        MDLabel:
+            text: 'G R I M E'
+            font_name: './fonts/Plaster-Regular.ttf'
+            theme_text_color: 'Custom'
+            text_color:0.949, 0.031, 0.424
+            font_size: "30sp"
+            size_hint_y: None
+            halign: 'center'
+            pos_hint: {'top':0.98}
+        Image:
+            source: ('./icon_sets/app_icons/ico-SM.png')
+            allow_stretch: False
+
+
+        MDLabel:
+            text: "SIGN IN"
+            font_style:'Button'
+            size_hint_y: None
+            font_size: "20sp"
+            halign: 'center'
+            theme_text_color: 'Custom'
+            text_color:"white"
+            pos_hint: {'top': 0.84,}
+        MDLabel:
+            text:"sign to restore all your conversation with grime ai."
+            halign: 'center'
+            size_hint_y: None
+            font_size: "15sp"
+            theme_text_color: 'Secondary'
+            pos_hint: {'top': 0.78,}
+
+        MDTextField:
+            id:username
+            hint_text: "Username"
+            pos_hint: {'center_x': 0.5,'center_y': 0.40}
+            theme_text_color: 'Custom'
+            size_hint: 0.8,None
+            height: "65dp"
+            icon_right:"account-key"
+            focus_behavior: True
+            font_size: '15sp'
+            icon_right_color_focus:'white'
+            hint_text_color_focus: 'white'
+            text_color_focus: "gray"
+            cursor_color: [0.949, 0.031, 0.424]
+            line_color_focus: 'white'
+
+        MDTextField:
+            id:passwords
+            hint_text: "Password"
+            pos_hint: {'center_x': 0.5,'center_y': 0.30}
+            theme_text_color: 'Custom'
+            size_hint: 0.8,None
+            height: "65dp"
+            icon_right: "account-lock"
+            focus_behavior: True
+            font_size: '15sp'
+            password:True
+            icon_right_color_focus:'white'
+            hint_text_color_focus: 'white'
+            text_color_focus: "gray"
+            cursor_color: [0.949, 0.031, 0.424]
+            line_color_focus:'white'
+
+        MDRaisedButton:
+            text: "SIGN IN"
+            font_style: 'Button'
+            text_color: "white"
+            font_size: "20sp"
+            id:login_btn
+            pos_hint: {'center_x': 0.5,'center_y': 0.18}
+            size_hint: 0.8,None
+            elevation: 3
+            height: "90dp"
+            on_release: root.login()
+            md_bg_color: (0.949, 0.031, 0.424)
+
+        MDTextButton:
+            text:"Don't have an account, SIGN UP ?"
+            size_hint_y: None
+            font_size: '13sp'
+            theme_text_color: 'Custom'
+            text_color: (0.949, 0.031, 0.424)
+            pos_hint: {'center_x': 0.5 , 'center_y': 0.026}
+            on_release:
+                root.manager.transition.direction='right'
+                root.manager.current = 'sign_up'
+
+        MDSpinner:
+            id: ai_spinner
+            active: False
+            size_hint: None, None
+            size: "20dp", "20dp"
+            pos_hint: {"center_x": 0.5, "center_y": 0.18}
+            color: [0.949, 0.031, 0.424]
+
+<Land_Page>:
+    name:"landing_page"
+    MDFloatLayout:
+        id:boom_boom
+        AsyncImage:
+            source: './image_set/GRIME.jpg'
+            fit_mode: 'fill'
+            id:background_img
+        Image:
+            source: "./image_set/grime_logo_line.png"
+            size_hint: None,None
+            size: '80dp','80dp'
+            pos_hint: {'top': 0.98,'center_x': .9}
+            allow_stretch: False
+        Image:
+            source: "./icon_sets/app_icons/ico-SM.png"
+            size_hint: None,None
+            size: '100dp','100dp'
+            pos_hint: {'top': 0.90,'center_x': .5}
+            allow_stretch: False
+
+        MDLabel:
+            text: 'G R I M E'
+            font_name: './fonts/Plaster-Regular.ttf'
+            theme_text_color: 'Custom'
+            text_color:0.949, 0.031, 0.424
+            font_size: "40sp"
+            size_hint_y: None
+            halign: 'center'
+            pos_hint: {'top':0.80}
+
+        MDLabel:
+            text: "your ai companion"
+            size_hint_y: None
+            font_size: "20sp"
+            halign: 'center'
+            font_name: './fonts/Chewy-Regular.ttf'
+            theme_text_color: 'Custom'
+            text_color:"white"
+            pos_hint: {'top': 0.73}
+
+        MDLabel:
+            text:"Chart and express your needs to grime ai. Make your Job and work more Flexable with GRIME with only one tap of button. Get Start with GRIME see the world as you have never seen it before."
+            halign: 'center'
+            size_hint_y: None
+            font_size: "15sp"
+            theme_text_color: 'Secondary'
+            pos_hint: {'top': 0.55,}
+
+        MDRaisedButton:
+            text: 'Get Started'
+            pos_hint: {'center_x': .5,'center_y': 0.11}
+            font_style: 'Button'
+            text_color: "white"
+            font_size: "20sp"
+            size_hint: 0.8,None
+            elevation: 3
+            height:'80dp'
+            height: "90dp"
+            md_bg_color: (0.949, 0.031, 0.424)
+            on_release: root.triger_widget()
+                # root.manager.transition.direction='left'
+                # root.manager.current = 'sign_up'
+        MDLabel:
+            text: "A FRVNK CREATION"
+            size_hint_y: None
+            font_size: "10sp"
+            halign: 'center'
+            font_name: './fonts/Comfortaa-Light.ttf'
+            theme_text_color: 'Custom'
+            text_color:"white"
+            pos_hint: {'center_x':.5 , 'center_y': 0.026}
+        MDCard:
+            id:btn_card
+            pos_hint: {'center_x':0.5 , 'center_y':0.5 }
+            size_hint: 0.97, 0.97
+            orientation: 'vertical'
+            spacing: 20
+            MDIconButton:
+                icon:"close"
+                # icon:'close-circle'
+
+                pos_hint: {'top':0.97,'center_x': .1}
+            # MDIconButton:
+            #     icon:"help"
+            #     pos_hint: {'top':0.97,'center_x': .9}
+            Image:
+                source: ('./icon_sets/reg_illu.png')
+                allow_stretch: False
+                pos_hint: {'center_x': 0.5,'center_y': 0.90}
+
+                # size_hint_y: None
+            MDRaisedButton:
+                text:"Create New Account"
+                pos_hint: {'center_x':0.5 , 'center_y':0.85 }
+                size_hint: 0.9,None
+                elevation: 4
+                font_size: "20sp"
+                height: "100dp"
+                theme_text_color: 'Custom'
+                text_color: (0.949, 0.031, 0.424)
+                font_style: 'Button'
+                md_bg_color: "white"
+                on_release:
+                    root.manager.transition.direction='left'
+                    root.manager.current = 'sign_up'
+
+            MDRaisedButton:
+                text:"Sign in"
+                pos_hint: {'center_x':0.5 , 'center_y':0.63 }
+                size_hint: 0.9,None
+                elevation: 4
+                height: "100dp"
+                font_size: "20sp"
+                theme_text_color: 'Custom'
+                text_color: (0.949, 0.031, 0.424)
+                font_style: 'Button'
+                md_bg_color: "white"
+                on_release:
+                    root.manager.transition.direction="left"
+                    root.manager.current='sign_in'
+            MDRaisedButton:
+                text:"Guest Mode"
+                pos_hint: {'center_x':0.5 , 'center_y':0.47}
+                size_hint: 0.9,None
+                elevation: 4
+                height: "90dp"
+                font_size: "20sp"
+                theme_text_color: 'Custom'
+                text_color: "white"
+                font_style: 'Button'
+                md_bg_color: (0.949, 0.031, 0.424)
+                on_release: root.activate_guest_mode()
+
+            Widget:
+                size_hint: None, None
+                size: '70dp','70dp'
+
+
+
+
+<Account>:
+    name:"account"
+
+    MDFloatLayout:
+        id:main_body
+        MDList:
+            pos_hint: {'center_X': .5}
+            TwoLineIconListItem:
+                text: "Username"
+                md_bg_color: 'black'
+                id:top_name
+                secondary_text: "@Guest"
+                divider_color:  (0.071, 0.071, 0.071)
+                theme_text_color: 'Custom'
+                text_color: (0.949, 0.031, 0.424)
+                IconLeftWidgetWithoutTouch:
+                    icon: "email"
+                    theme_icon_color: 'Custom'
+                    icon_color:"white"
+                    icon_size: "20px"
+
+
+            TwoLineIconListItem:
+                text: "Name"
+                secondary_text: "Guest Mode"
+                id:name_label
+                divider_color:  (0.071, 0.071, 0.071)
+                md_bg_color: 'black'
+                theme_text_color: 'Custom'
+                text_color: (0.949, 0.031, 0.424)
+
+                IconLeftWidgetWithoutTouch:
+                    icon: "account"
+                    theme_icon_color: 'Custom'
+                    icon_color:"white"
+                    icon_size: "20px"
+
+            TwoLineIconListItem:
+                text: "Email"
+                md_bg_color: 'black'
+                id:email_label
+                secondary_text: "Guest"
+                divider_color: (0.071, 0.071, 0.071)
+                theme_text_color: 'Custom'
+                text_color: (0.949, 0.031, 0.424)
+                IconLeftWidgetWithoutTouch:
+                    icon: "email"
+                    theme_icon_color: 'Custom'
+                    icon_color:"white"
+                    icon_size: "20px"
+
+            TwoLineIconListItem:
+                text: "Account ID"
+                md_bg_color: 'black'
+                id:acc_id
+                secondary_text: "Not signed in"
+                divider_color: (0.071, 0.071, 0.071)
+                theme_text_color: 'Custom'
+                text_color: (0.949, 0.031, 0.424)
+                IconLeftWidgetWithoutTouch:
+                    icon:'id-card'
+                    theme_icon_color: 'Custom'
+                    icon_color:"white"
+                    icon_size: "20px"
+
+            OneLineIconListItem:
+                id:delete_conv
+                text: "Delete my Conversation"
+                divider_color:  (0.071, 0.071, 0.071)
+                on_release: root.delete_chart()
+                padding: 50
+                disabled:'True'
+                IconLeftWidgetWithoutTouch:
+                    icon:'delete-forever'
+                    theme_icon_color: 'Custom'
+                    icon_color:"white"
+                    icon_size: "20px"
+
+            OneLineIconListItem:
+                text: "Login"
+                id:login_list
+                divider_color: (0.071, 0.071, 0.071)
+                on_release: root.varify_log_out()
+                IconLeftWidgetWithoutTouch:
+                    icon: "logout"
+                    theme_icon_color: 'Custom'
+                    icon_color:"white"
+                    icon_size: "20px"
+
+            OneLineIconListItem:
+                text: "Delete my Account"
+                divider_color: (0.071, 0.071, 0.071)
+                id:delete_acc
+                disabled: 'True'
+                on_release: root.delete_account()
+                IconLeftWidgetWithoutTouch:
+                    icon:'cancel'
+                    theme_icon_color: 'Custom'
+                    icon_color:"white"
+                    icon_size: "20px"
+
+
+
+
+        MDCard:
+            orientation: 'vertical'
+            radius: [60,60,60,60]
+            pos_hint: {'top':0.90,'center_x': 0.5}
+            size_hint_y: None
+            size_hint_x: None
+            size: '80dp','75dp'
+            elevation: 5
+
+        MDLabel:
+            id:full_name_label
+            halign: 'center'
+            theme_text_color: 'Custom'
+            text_color:'white'
+            # font_style: 'Caption'
+            bold: True
+            font_size: '16sp'
+            text: ""
+            pos_hint: {'top': 0.83}
+            size_hint_y:  None
+
+        MDLabel:
+            halign: 'center'
+            theme_text_color: 'Custom'
+            text_color:(0.949, 0.031, 0.424)
+            bold: True
+            font_size: '30sp'
+            text: "Account"
+            pos_hint: {'top': 1}
+            size_hint_y: 0.11
+
+        MDIconButton:
+            icon:'arrow-left'
+            theme_icon_color: 'Custom'
+            icon_color:(0.949, 0.031, 0.424)
+            pos_hint: {'top':1,'center_x':0.05}
+            on_release:
+                root.manager.transition.direction='left'
+                root.manager.current = 'Home'
+
+<Chat>:
+    name:'chat'
+    md_bg_color: 'black'
+    MDFloatLayout:
+        id:main_chat_box
+
+        MDLabel:
+            halign: 'center'
+            theme_text_color: 'Custom'
+            text_color:(0.949, 0.031, 0.424)
+            bold: True
+            font_size: '25sp'
+            text: "Chat History"
+            pos_hint: {'top': 1}
+            size_hint_y: 0.11
+
+        MDIconButton:
+            icon:'arrow-left'
+            pos_hint: {'top':1,'center_x':0.05}
+            on_release:
+                root.manager.transition.direction='left'
+                root.manager.current= 'Home'
+
+        MDIconButton:
+            icon:'magnify'
+            pos_hint: {'top':0.99,'center_x':0.9}
+            on_release:
+                root.manager.transition.direction='left'
+                root.manager.current= 'search'
+
+        MDCard:
+            radius: [25,25,0,0]
+            pos_hint: {'center_x': .5,'center_y': 0.44}
+            size_hint: 1, 0.89
+            id:main_box
+            icon:'chat-question-outline'
+            orientation: 'vertical'
+
+            MDScrollView:
+                id:scrool
+                MDList:
+                    id:box
+        # MDCard:
+        #     pos_hint:{'center_x':0.5 , 'center_y':0.5 }
+        #     size_hint:0.99, 0.99
+        #     spacing: 3
+        #     id:guest_card
+        #     Image:
+        #         source:'./icon_sets/guest_icon.png'
+        #         allow_stretch: False
+        #         pos_hint: {'center_x': 0.5,'center_y': 0.55}
+        #         size: '200dp','200dp'
+        #         size_hint:None, None
+
+        #     MDRaisedButton:
+        #         text:'May be Later'
+        #         font_style:  'Button'
+        #         text_color: "white"
+        #         font_size: "27sp"
+        #         pos_hint: {'center_x': 0.5,'center_y': 0.50}
+        #         size_hint: 0.8,None
+        #         elevation: 3
+        #         height: "53dp"
+        #         md_bg_color: 'green'
+        #         on_release: root.manager.current = "Home"
+        #     Widget:
+        #         size_hint: None, None
+        #         height: '10dp'
+        #     MDRaisedButton:
+        #         text:'Login'
+        #         font_style:  'Button'
+        #         text_color: "white"
+        #         font_size: "30sp"
+        #         pos_hint: {'center_x': 0.5,'center_y': 0.50}
+        #         size_hint: 0.8,None
+        #         elevation: 3
+        #         height: "53dp"
+        #         md_bg_color: (0.949, 0.031, 0.424)
+        #         on_release:  root.manager.current = "sign_in"
+        #     Widget:
+        #         size_hint: None, None
+        #         height: '50dp'
+<Search_Chat>:
+    name:'search'
+    MDFloatLayout:
+        MDTextField:
+            hint_text: "Search for Chats........"
+            mode: "round"
+            icon_left: 'magnify'
+            line_color_focus: 'black'
+            padding: '5sp'
+            line_color_normal: 'black'
+            size_hint: 0.96,0.080
+            max_text_length: 120
+            text_color_focus: "grey"
+            md_bg_color: [0.329, 0.329, 0.329]
+            icon_left_color_focus: (0.949, 0.031, 0.424)
+            pos_hint: {'center_y':0.85,'center_x':.5}
+        MDLabel:
+            halign: 'center'
+            theme_text_color: 'Custom'
+            text_color:(0.949, 0.031, 0.424)
+            bold: True
+            font_style: 'Button'
+            font_size: '25sp'
+            text: "Search"
+            pos_hint: {'top': 1}
+            size_hint_y: 0.11
+        MDIconButton:
+            icon:'arrow-left'
+            pos_hint: {'top':0.98,'center_x':0.05}
+            on_release:
+                root.manager.transition.direction='right'
+                root.manager.current= 'chat'
+        MDCard:
+            radius: [25,25,0,0]
+            pos_hint: {'center_x': .5 , 'center_y':0.30}
+            md_bg_color: 'black'
+
+            id:chat_hold
+            ScrollView:
+
+                MDList:
+                    id:hist_list
+
+# <Share_App>:
+#     name:'share_app'
+
+#     MDFloatLayout:
+
+#         MDLabel:
+#             text: "share this app"
+#             font_style:'Button'
+#             size_hint_y: None
+#             font_size: "20sp"
+#             halign: 'center'
+#             theme_text_color: 'Custom'
+#             text_color: (0.949, 0.031, 0.424)
+#             pos_hint: {'top': 1,}
+#         MDLabel:
+#             text:'Support the app by sharing to friends'
+#             font_style:'Caption'
+#             halign: 'center'
+#             size_hint_y: None
+#             pos_hint: {'top': 0.96}
+
+
+
+# MDRectangleFlatIconButton:
+#         icon: "android"
+#     text: "MDRectangleFlatIconButton"
+#     theme_text_color: "Custom"
+#     text_color: "white"
+#     line_color: "red"
+#     theme_icon_color: "Custom"
+#     icon_color: "orange"
+
+<Community>:
+    name:'community'
+
+    MDFloatLayout:
+
+        AsyncImage:
+            source: ("./image_set/drop.jpg")
+            fit_mode: 'fill'
+        MDLabel:
+            text: 'Grime community'
+            theme_text_color: 'Custom'
+            text_color:"white"
+            size_hint_y: 0.11
+            font_size:'25sp'
+            pos_hint: {'top': 0.90, 'center_x': 0.55}
+
+        MDLabel:
+            text:'Support the Grime corp'
+            size_hint_y: 0.11
+            font_size:'16sp'
+            pos_hint: {'top': 0.85, 'center_x': 0.55}
+
+        MDIconButton:
+            icon:'arrow-left'
+            theme_icon_color: 'Custom'
+            icon_color:(0.949, 0.031, 0.424)
+            pos_hint: {'top':0.98,'center_x':0.05}
+            on_release:
+                root.manager.transition.direction='left'
+                root.manager.current='Home'
+
+        MDLabel:
+            text:'Our Community'
+            theme_text_color: 'Custom'
+            text_color: (0.949, 0.031, 0.424)
+            size_hint_y: 0.11
+            font_size:'20sp'
+
+            pos_hint: {'top': 1 , 'center_x': 0.62}
+        MDCard:
+            radius: [20,20,20,20]
+            size_hint: 1,0.6
+            orientation: 'vertical'
+
+            pos_hint: {'center_x': 0.5,'center_y': 0.45}
+
+        MDTextField:
+            mode:'rectangle'
+            hint_text: "Name OR Email ID"
+            pos_hint: {'center_x': 0.5,'top': .7}
+            theme_text_color: 'Custom'
+            size_hint: 0.9,None
+            height: "65dp"
+            focus_behavior: True
+            font_size: '15sp'
+            hint_text_color_focus:  'white'
+            text_color_focus: "gray"
+            cursor_color: [0.949, 0.031, 0.424]
+            line_color_focus: 'white'
+        MDTextField:
+            mode:'rectangle'
+            hint_text: "Air"
+            pos_hint: {'center_x': 0.5,'top': .6}
+            theme_text_color: 'Custom'
+            size_hint: 0.9,None
+            height: "65dp"
+            focus_behavior: True
+            font_size: '15sp'
+            hint_text_color_focus:  'white'
+            text_color_focus: "gray"
+            cursor_color: [0.949, 0.031, 0.424]
+            line_color_focus: 'white'
+
+
+
+
+<splash_page>:
+    name: 'splash'
+    MDFloatLayout:
+        md_bg_color: 'black'
+        Image:
+            source: "./icon_sets/app_icons/ico-XL.png"
+            allow_stretch:True
+            size_hint: None,None
+            size:'300dp','300dp'
+            pos_hint: {'center_x':0.5 , 'center_y':0.7}
+
+        MDLabel:
+            text: "G R I M E"
+            font_name: './fonts/Plaster-Regular.ttf'
+            halign: 'center'
+            theme_text_color: 'Custom'
+            text_color: 'white'#'white'
+            bold: True
+            # font_style: 'Button'
+            font_size: '27sp'
+            # text: "Search"
+            pos_hint: {'top': 0.58}
+            size_hint_y: 0.11
+
+        MDSpinner:
+            id: ai_spinner
+            active: True
+            size_hint: None, None
+            size: "20dp", "20dp"
+            pos_hint: {"center_x": 0.5, "center_y": 0.37}
+            color: [0.949, 0.031, 0.424]
+<Activity_screen>:
+    name:'activity'
+    MDFloatLayout:
+        MDSpinner:
+            active:True

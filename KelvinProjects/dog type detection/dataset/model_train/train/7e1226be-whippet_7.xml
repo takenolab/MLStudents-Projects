@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<annotation>
+<folder>images</folder>
+<filename>7e1226be-whippet_7.jpg</filename>
+<source>
+<database>MyDatabase</database>
+<annotation>COCO2017</annotation>
+<image>flickr</image>
+<flickrid>NULL</flickrid>
+<annotator>1</annotator>
+</source>
+<owner>
+<flickrid>NULL</flickrid>
+<name>Label Studio</name>
+</owner>
+<size>
+<width>500</width>
+<height>374</height>
+<depth>3</depth>
+</size>
+<segmented>0</segmented>
+<object>
+<name>whippet</name>
+<pose>Unspecified</pose>
+<truncated>0</truncated>
+<difficult>0</difficult>
+<bndbox>
+<xmin>41</xmin>
+<ymin>10</ymin>
+<xmax>436</xmax>
+<ymax>368</ymax>
+</bndbox>
+</object>
+</annotation>
