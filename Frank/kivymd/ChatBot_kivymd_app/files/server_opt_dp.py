@@ -6,7 +6,7 @@ import random
 
 
 # serverSelectionTimeoutMS=5000
-uri = "mongodb+srv://Frankkwizigira:J4W3K3q997jUlOsv@grimecluster0.py6uoj0.mongodb.net/?retryWrites=true&w=majority&appName=grimeCluster0"
+uri = "YOUR MONGODB CONNECTION STRING"
 cluster = MongoClient(uri,serverSelectionTimeoutMS=5000,server_api=ServerApi('1'))
 try:
     cluster.admin.command('ping')
