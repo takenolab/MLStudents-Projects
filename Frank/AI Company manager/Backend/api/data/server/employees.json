@@ -1,0 +1,38 @@
+[
+    {
+        "employee_name": "Martin Chiwawa",
+        "employee_gender": "Female",
+        "employee_title": "Operations Coordinator",
+        "employee_department": "Media",
+        "employee_role": "reciepent",
+        "employee_email": "Yfrvnk@yahoo.com",
+        "employee_id": "f6e62be86d974a258d8254b643b3b10e"
+    },
+    {
+        "employee_name": "Chris Owen",
+        "employee_title": "Director manager",
+        "employee_gender": "Male",
+        "employee_department": "Finance",
+        "employee_role": "Manager",
+        "employee_email": "frvnk900@gmail.com",
+        "employee_id": "ff8df28b42634e2aa89b937fb4be0ab6"
+    },
+    {
+        "employee_name": "frank K. Chiwawa",
+        "employee_title": "Data analysist",
+        "employee_gender": "Male",
+        "employee_department": "Logistics",
+        "employee_role": "marketing data analysist",
+        "employee_email": "frankorg716@gmail.com",
+        "employee_id": "eb05837607ae4df2a9b5b7d37c410b4a"
+    },
+    {
+        "employee_name": "Jacob mathwes",
+        "employee_title": "Software Develper",
+        "employee_gender": "Male",
+        "employee_department": "IT",
+        "employee_role": "soft ware and data manager",
+        "employee_email": "soundtopia23@gmail.com",
+        "employee_id": "823404cf6cd14d9aacd013fcb9984df9"
+    }
+]
