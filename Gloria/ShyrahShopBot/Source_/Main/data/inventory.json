@@ -1,0 +1,7 @@
+{
+  "bread": {"price": 3000, "stock": 20},
+  "milk": {"price": 4500, "stock": 15},
+  "eggs": {"price": 7000, "stock": 10},
+  "soap": {"price": 2000, "stock": 25},
+  "rice": {"price": 12000, "stock": 30}
+}

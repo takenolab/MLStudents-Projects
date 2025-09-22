@@ -1,0 +1,7 @@
+{
+  "bread": {"aisle": 1, "section": "Bakery"},
+  "milk": {"aisle": 3, "section": "Dairy"},
+  "eggs": {"aisle": 2, "section": "Dairy"},
+  "soap": {"aisle": 5, "section": "Cleaning"},
+  "rice": {"aisle": 4, "section": "Grains"}
+}
