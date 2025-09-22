@@ -169,8 +169,8 @@ def get_conversation_bodies(sender_email: str, max_threads: int = 5) -> list[dic
             }
             for email, messages in email_conversations.items()
         ]
-        username = "frvnkkwizigira@gmail.com"
-        password = "vzaffqodhmjwwssv"  
+        username = "youremail@gmail.com"
+        password = "your app secret"  
         sender_email = sender_email
 
         print(mark_emails_as_read(username, password, sender_email))
@@ -180,3 +180,4 @@ def get_conversation_bodies(sender_email: str, max_threads: int = 5) -> list[dic
     except HttpError as error:
         print(f"An error occurred during an API call: {error}")
         return []
+
